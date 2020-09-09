@@ -1,14 +1,10 @@
-def prepare_string(string: str) -> str:
-    # deleting non-alphabetic characters and turning to uppercase
-    return ''.join(c.upper() for c in string if c.isalpha())
-
 def encrypt(plaintext: str, keyword: str):
     """encrypting text using vigenere encryption"""
-    # preparing texts
+
+    # preparing text, lists, and integers
     plaintext = prepare_string(plaintext)
     keyword = prepare_string(keyword)
     keyword = [ord(x) - 64 for x in keyword]
-
     encrypted =  ''
     key = 0
 
@@ -32,11 +28,11 @@ def encrypt_letter(char, shift):
 
 def decrypt(text: str, keyword: str):
     """decrypting text using vigenere decryption knowing they key"""
-    # preparing texts
+
+    # preparing text, lists, and integers
     text = prepare_string(text)
     keyword = prepare_string(keyword)
     keyword = [ord(x) - 64 for x in keyword]
-
     decrypted =  ''
     key = 0
 
@@ -56,4 +52,8 @@ def decrypt(text: str, keyword: str):
 
 def decrypt_letter(char, shift):
     # Return back shifted character for decryption
-    return chr((ord(char) - shift - 65) % 26 + 65) 
+    return chr((ord(char) - shift - 65) % 26 + 65)
+
+def prepare_string(string: str) -> str:
+    # deleting non-alphabetic characters and turning to uppercase
+    return ''.join(c.upper() for c in string if c.isalpha())
