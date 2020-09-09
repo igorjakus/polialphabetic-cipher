@@ -1,57 +1,59 @@
-def prepare_string(string):
-    """we prepare text to be used in algorithm"""
-    # Changing to uppercase
-    string = string.upper()
+def prepare_string(string: str) -> str:
+    # deleting non-alphabetic characters and turning to uppercase
+    return ''.join(c.upper() for c in string if c.isalpha())
 
-    # Deleting spaces
-    while ' ' in string:
-        string = string.replace(' ', '')
-    
-    # Returning corected version
-    return string
-
-def encrypt(plaintext: str, key: str) -> str:
+def encrypt(plaintext: str, keyword: str):
     """encrypting text using vigenere encryption"""
     # preparing texts
     plaintext = prepare_string(plaintext)
-    key = prepare_string(key)
-    key = [ord(x) - 64 for x in key]
+    keyword = prepare_string(keyword)
+    keyword = [ord(x) - 64 for x in keyword]
 
     encrypted =  ''
-    key_index = 0
+    key = 0
 
     for char in plaintext:
-        if key_index == len(key): 
-            key_index = 0
-        shift = key[key_index]
-        encrypted += encrypt_letter(char, shift)
-        key_index += 1
+        # If keyword ends go to the begin
+        if key == len(keyword): 
+            key = 0
+        
+        # Appending encrypted letter
+        encrypted += encrypt_letter(char, keyword[key])
 
-    return encrypted
+        # Select next key for shifting
+        key += 1
+
+    # Return encrypted text or None if there's none
+    return encrypted if encrypted != '' else None
 
 def encrypt_letter(char, shift):
-    moved = chr((ord(char) + shift - 64) % 26 + 64) 
-    return moved if moved.isalpha() else 'Z'
+    # Return shifted character for encryption
+    return chr((ord(char) + shift - 65) % 26 + 65) 
 
-def decrypt(text: str, key: str) -> str:
-    """decrypting text using vigenere decryption"""
+def decrypt(text: str, keyword: str):
+    """decrypting text using vigenere decryption knowing they key"""
     # preparing texts
     text = prepare_string(text)
-    key = prepare_string(key)
-    key = [ord(x) - 64 for x in key]
+    keyword = prepare_string(keyword)
+    keyword = [ord(x) - 64 for x in keyword]
 
     decrypted =  ''
-    key_index = 0
-        
-    for char in text:
-        if key_index == len(key): 
-            key_index = 0
-        shift = key[key_index]
-        decrypted += decrypt_letter(char, shift)
-        key_index += 1
+    key = 0
 
-    return decrypted
+    for char in text:
+        # If keyword ends go to the begin
+        if key == len(keyword): 
+            key = 0
+        
+        # Appending decrypted letter
+        decrypted += decrypt_letter(char, keyword[key])
+
+        # Select next key for shifting
+        key += 1
+
+    # Return decrypted text or None if there's none
+    return decrypted if decrypted != '' else None
 
 def decrypt_letter(char, shift):
-    moved = chr((ord(char) - shift - 64) % 26 + 64) 
-    return moved if moved.isalpha() else 'Z'
+    # Return back shifted character for decryption
+    return chr((ord(char) - shift - 65) % 26 + 65) 
