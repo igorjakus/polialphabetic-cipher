@@ -14,7 +14,8 @@ def encrypt(plaintext: str, keyword: str):
             key = 0
         
         # Appending encrypted letter
-        encrypted += encrypt_letter(char, keyword[key])
+        if keyword:
+            encrypted += encrypt_letter(char, keyword[key])
 
         # Select next key for shifting
         key += 1
@@ -42,7 +43,8 @@ def decrypt(text: str, keyword: str):
             key = 0
         
         # Appending decrypted letter
-        decrypted += decrypt_letter(char, keyword[key])
+        if keyword:
+            decrypted += decrypt_letter(char, keyword[key])
 
         # Select next key for shifting
         key += 1
