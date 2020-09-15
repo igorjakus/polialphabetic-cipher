@@ -5,7 +5,7 @@ def encrypt(plaintext: str, keyword: str):
     plaintext = prepare_string(plaintext)
     keyword = prepare_string(keyword)
     keyword = [ord(x) - 64 for x in keyword]
-    encrypted =  ''
+    encrypted = ''
     key = 0
 
     for char in plaintext:
@@ -23,9 +23,11 @@ def encrypt(plaintext: str, keyword: str):
     # Return encrypted text or None if there's none
     return encrypted if encrypted != '' else None
 
+
 def encrypt_letter(char, shift):
     # Return shifted character for encryption
     return chr((ord(char) + shift - 65) % 26 + 65) 
+
 
 def decrypt(text: str, keyword: str):
     """decrypting text using vigenere decryption knowing they key"""
@@ -34,7 +36,7 @@ def decrypt(text: str, keyword: str):
     text = prepare_string(text)
     keyword = prepare_string(keyword)
     keyword = [ord(x) - 64 for x in keyword]
-    decrypted =  ''
+    decrypted = ''
     key = 0
 
     for char in text:
@@ -52,9 +54,11 @@ def decrypt(text: str, keyword: str):
     # Return decrypted text or None if there's none
     return decrypted if decrypted != '' else None
 
+
 def decrypt_letter(char, shift):
     # Return back shifted character for decryption
     return chr((ord(char) - shift - 65) % 26 + 65)
+
 
 def prepare_string(string: str) -> str:
     # deleting non-alphabetic characters and turning to uppercase

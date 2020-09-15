@@ -1,3 +1,5 @@
 .vscode
 temp.py
 __pycache__
+.pytest_cache
+.idea/
