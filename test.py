@@ -30,7 +30,7 @@ def test_decryption_1():
 
 
 def test_decryption_2():
-    key = 'zab'
+    key = 'zyx'
     encrypted = 'aaaaaaaaa'
     expected = 'ABCABCABC'
     assert decrypt(encrypted, key) == expected
