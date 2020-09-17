@@ -10,9 +10,9 @@ def encrypt(plaintext: str, keyword: str):
 
     for char in plaintext:
         # If keyword ends go to the begin
-        if key == len(keyword): 
+        if key == len(keyword):
             key = 0
-        
+
         # Appending encrypted letter
         if keyword:
             encrypted += encrypt_letter(char, keyword[key])
@@ -26,7 +26,7 @@ def encrypt(plaintext: str, keyword: str):
 
 def encrypt_letter(char, shift):
     # Returns shifted character for encryption
-    return chr((ord(char) + shift - 65) % 26 + 65) 
+    return chr((ord(char) + shift - 65) % 26 + 65)
 
 
 def decrypt(text: str, keyword: str):
@@ -41,9 +41,9 @@ def decrypt(text: str, keyword: str):
 
     for char in text:
         # If keyword ends go to the begin
-        if key == len(keyword): 
+        if key == len(keyword):
             key = 0
-        
+
         # Appending decrypted letter
         if keyword:
             decrypted += decrypt_letter(char, keyword[key])
